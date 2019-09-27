@@ -141,22 +141,22 @@ if [ "$NUM_PYTHON" = "2" ]; then
   if [ "$DD_PYTHON_VERSION" = "2" ]; then
     PYTHON_VERSION="2.7"
     rm -rf "$APT_DIR"/opt/datadog-agent/embedded/lib/python3.*
-    rm "$APT_DIR"/opt/datadog-agent/embedded/pip3*
-    rm "$APT_DIR"/opt/datadog-agent/embedded/python3*
-    rm "$APT_DIR"/opt/datadog-agent/embedded/pydoc3*
-    ln -sfn /opt/datadog-agent/embedded/bin/python${PYTHON_VERSION} /opt/datadog-agent/embedded/bin/python
-    ln -sfn /opt/datadog-agent/embedded/bin/python${PYTHON_VERSION}-config /opt/datadog-agent/embedded/bin/python-config
-    ln -sfn /opt/datadog-agent/embedded/bin/pip${PYTHON_VERSION} /opt/datadog-agent/embedded/bin/pip
+    rm "$APT_DIR"/opt/datadog-agent/embedded/bin/pip3*
+    rm "$APT_DIR"/opt/datadog-agent/embedded/bin/python3*
+    rm "$APT_DIR"/opt/datadog-agent/embedded/bin/pydoc3*
+    ln -sfn "$APT_DIR"/opt/datadog-agent/embedded/bin/python${PYTHON_VERSION} "$APT_DIR"/opt/datadog-agent/embedded/bin/python
+    ln -sfn "$APT_DIR"/opt/datadog-agent/embedded/bin/python${PYTHON_VERSION}-config "$APT_DIR"/opt/datadog-agent/embedded/bin/python-config
+    ln -sfn "$APT_DIR"/opt/datadog-agent/embedded/bin/pip${PYTHON_VERSION} "$APT_DIR"/opt/datadog-agent/embedded/bin/pip
   fi
   if [ "$DD_PYTHON_VERSION" = "3" ]; then
     PYTHON_VERSION="3.7"
     rm -rf "$APT_DIR"/opt/datadog-agent/embedded/lib/python2.*
-    rm "$APT_DIR"/opt/datadog-agent/embedded/pip2*
-    rm "$APT_DIR"/opt/datadog-agent/embedded/python2*
-    rm "$APT_DIR"/opt/datadog-agent/embedded/pydoc*
-    ln -sfn /opt/datadog-agent/embedded/bin/python${PYTHON_VERSION} /opt/datadog-agent/embedded/bin/python
-    ln -sfn /opt/datadog-agent/embedded/bin/python${PYTHON_VERSION}-config /opt/datadog-agent/embedded/bin/python-config
-    ln -sfn /opt/datadog-agent/embedded/bin/pip${PYTHON_VERSION} /opt/datadog-agent/embedded/bin/pip
+    rm "$APT_DIR"/opt/datadog-agent/embedded/bin/pip2*
+    rm "$APT_DIR"/opt/datadog-agent/embedded/bin/python2*
+    rm "$APT_DIR"/opt/datadog-agent/embedded/bin/pydoc*
+    ln -sfn "$APT_DIR"/opt/datadog-agent/embedded/bin/python${PYTHON_VERSION} "$APT_DIR"/opt/datadog-agent/embedded/bin/python
+    ln -sfn "$APT_DIR"/opt/datadog-agent/embedded/bin/python${PYTHON_VERSION}-config "$APT_DIR"/opt/datadog-agent/embedded/bin/python-config
+    ln -sfn "$APT_DIR"/opt/datadog-agent/embedded/bin/pip${PYTHON_VERSION} "$APT_DIR"/opt/datadog-agent/embedded/bin/pip
   fi
 fi
 
