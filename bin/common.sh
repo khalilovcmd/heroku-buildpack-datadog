@@ -24,3 +24,6 @@ kube_dns kube_metrics_server kube_proxy kube_scheduler kubelet kubernetes_state 
 kyototycoon linkerd mapreduce marathon mesos_master mesos_slave nagios nfsstat \
 nginx_ingress_controller openldap openstack openstack_controller postfix \
 powerdns_recursor presto riakcs snmp sqlserver squid statsd tokumx vsphere yarn)
+
+DELETE_PACKAGES=(boto kubernetes google lxml openstack pylint pysnmp pysnmp_mibs \
+pyVim pyVmomi ddtrace)

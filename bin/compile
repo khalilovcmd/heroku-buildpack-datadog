@@ -115,6 +115,11 @@ for i in "${DELETE_INTEGRATIONS[@]}"; do
   rm -rf "$APT_DIR"/opt/datadog-agent/embedded/lib/python*/site-packages/datadog_checks/"$i"
 done
 
+# Remove unnedded Python packages
+for i in "${DELETE_PACKAGES[@]}"; do
+  rm -rf "$APT_DIR/opt/datadog-agent/embedded/lib/python*/site-packages/$i"
+done
+
 # Remove the agent binaries that are not needed
 rm -rf "$APT_DIR/opt/datadog-agent/embedded/bin/system-probe"
 
