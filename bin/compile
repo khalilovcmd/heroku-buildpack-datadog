@@ -107,6 +107,9 @@ rm -rf "$APT_DIR"/opt/datadog-agent/sources \
        "$APT_DIR"/opt/datadog-agent/embedded/share/doc \
        "$APT_DIR"/opt/datadog-agent/embedded/share/man
 
+# Remove Cryptodome Selftest
+rm -rf "$APT_DIR"/opt/datadog-agent/embedded/lib/python*/site-packages/Cryptodome/SelfTest
+
 # Prior to Agent 6.14 there was only 1 python version
 DD_AGENT_MULT_PYTHON_VERSION="6.14"
 if [ "$DD_AGENT_VERSION" == "$(echo -e "$DD_AGENT_MULT_PYTHON_VERSION\n$DD_AGENT_VERSION" | sort -V | head -n1)" ]; then
