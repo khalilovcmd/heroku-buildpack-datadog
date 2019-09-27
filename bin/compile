@@ -117,10 +117,10 @@ done
 
 # Remove unnedded Python packages
 for i in "${DELETE_PACKAGES[@]}"; do
-  rm -rf "$APT_DIR/opt/datadog-agent/embedded/lib/python*/site-packages/$i"
+  rm -rf "$APT_DIR"/opt/datadog-agent/embedded/lib/python*/site-packages/"$i"
 done
 
-# Remove the agent binaries that are not needed
+# Remove the system-probe binary, only needed for network performance monitoring
 rm -rf "$APT_DIR/opt/datadog-agent/embedded/bin/system-probe"
 
 if [ -f "$ENV_DIR/DD_APM_ENABLED" ]; then
