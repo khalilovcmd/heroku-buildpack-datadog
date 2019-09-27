@@ -128,9 +128,27 @@ if [ "$NUM_PYTHON" = "2" ]; then
     DD_PYTHON_VERSION="2" # if not specified, we default to Python 2
   fi
 
-  # We remove the unneeded version of Python
-  if [ "$DD_PYTHON_VERSION" = "2" ]; then rm -rf "$APT_DIR"/opt/datadog-agent/embedded/lib/python3.*; fi
-  if [ "$DD_PYTHON_VERSION" = "3" ]; then rm -rf "$APT_DIR"/opt/datadog-agent/embedded/lib/python2.*; fi
+  # We remove the unneeded version of Python and update symlinks
+  if [ "$DD_PYTHON_VERSION" = "2" ]; then
+    PYTHON_VERSION="2.7"
+    rm -rf "$APT_DIR"/opt/datadog-agent/embedded/lib/python3.*
+    rm "$APT_DIR"/opt/datadog-agent/embedded/pip3*
+    rm "$APT_DIR"/opt/datadog-agent/embedded/python3*
+    rm "$APT_DIR"/opt/datadog-agent/embedded/pydoc3*
+    ln -sfn /opt/datadog-agent/embedded/bin/python${PYTHON_VERSION} /opt/datadog-agent/embedded/bin/python
+    ln -sfn /opt/datadog-agent/embedded/bin/python${PYTHON_VERSION}-config /opt/datadog-agent/embedded/bin/python-config
+    ln -sfn /opt/datadog-agent/embedded/bin/pip${PYTHON_VERSION} /opt/datadog-agent/embedded/bin/pip
+  fi
+  if [ "$DD_PYTHON_VERSION" = "3" ]; then
+    PYTHON_VERSION="3.7"
+    rm -rf "$APT_DIR"/opt/datadog-agent/embedded/lib/python2.*
+    rm "$APT_DIR"/opt/datadog-agent/embedded/pip2*
+    rm "$APT_DIR"/opt/datadog-agent/embedded/python2*
+    rm "$APT_DIR"/opt/datadog-agent/embedded/pydoc*
+    ln -sfn /opt/datadog-agent/embedded/bin/python${PYTHON_VERSION} /opt/datadog-agent/embedded/bin/python
+    ln -sfn /opt/datadog-agent/embedded/bin/python${PYTHON_VERSION}-config /opt/datadog-agent/embedded/bin/python-config
+    ln -sfn /opt/datadog-agent/embedded/bin/pip${PYTHON_VERSION} /opt/datadog-agent/embedded/bin/pip
+  fi
 fi
 
 # Rewrite package-config files
