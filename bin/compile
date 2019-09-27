@@ -115,6 +115,17 @@ for i in "${DELETE_INTEGRATIONS[@]}"; do
   rm -rf "$APT_DIR"/opt/datadog-agent/embedded/lib/python*/site-packages/datadog_checks/"$i"
 done
 
+# Remove the agent binaries that are not needed
+rm -rf "$APT_DIR/opt/datadog-agent/embedded/bin/system-probe"
+
+if [ "$DD_APM_ENABLED" == "false" ]; then
+  rm -rf "$APT_DIR/opt/datadog-agent/embedded/bin/trace-agent"
+fi
+
+# If the process agent hasn't been explicitly enabled, delete the agent
+if ! [ "$DD_PROCESS_AGENT" == "true" ]; then
+  rm -rf "$APT_DIR/opt/datadog-agent/embedded/bin/process-agent"
+fi
 
 # Prior to Agent 6.14 there was only 1 python version
 DD_AGENT_MULT_PYTHON_VERSION="6.14"
