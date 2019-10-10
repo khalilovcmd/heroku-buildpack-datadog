@@ -39,21 +39,21 @@ for file in "$APP_DATADOG_CONF_DIR"/*.yaml; do
 done
 
 # Add tags to the config file
-DYNOHOST="$(hostname )"
-DYNOTYPE=${DYNO%%.*}
-TAGS="tags:\n  - dyno:$DYNO\n  - dynotype:$DYNOTYPE"
+# DYNOHOST="$(hostname )"
+# DYNOTYPE=${DYNO%%.*}
+# TAGS="tags:\n  - dyno:$DYNO\n  - dynotype:$DYNOTYPE"
 
-if [ -n "$HEROKU_APP_NAME" ]; then
-  TAGS="$TAGS\n  - appname:$HEROKU_APP_NAME"
-fi
+# if [ -n "$HEROKU_APP_NAME" ]; then
+#   TAGS="$TAGS\n  - appname:$HEROKU_APP_NAME"
+# fi
 
 # Convert comma delimited tags from env vars to yaml
-if [ -n "$DD_TAGS" ]; then
-  DD_TAGS="$(sed "s/,[ ]\?/\\\n  - /g" <<< "$DD_TAGS")"
-  TAGS="$TAGS\n  - $DD_TAGS"
-  # User set tags are now in YAML, clear the env var.
-  export DD_TAGS=""
-fi
+# if [ -n "$DD_TAGS" ]; then
+#   DD_TAGS="$(sed "s/,[ ]\?/\\\n  - /g" <<< "$DD_TAGS")"
+#   TAGS="$TAGS\n  - $DD_TAGS"
+#   # User set tags are now in YAML, clear the env var.
+#   export DD_TAGS=""
+# fi
 
 # Inject tags after example tags.
 # Config files for agent versions 6.11 and earlier:
@@ -88,7 +88,7 @@ if [ -z "$DD_HOSTNAME" ]; then
     fi
 
     D="$(echo "$DYNO" | sed -e 's/[^a-zA-Z0-9.-]/-/g' -e 's/^-//g')"
-    export DD_HOSTNAME="$HAN.$D"
+    export DD_HOSTNAME="$HAN"
   else
     # Set the hostname to the dyno host
     DD_HOSTNAME="$(echo "$DYNOHOST" | sed -e 's/[^a-zA-Z0-9-]/-/g' -e 's/^-//g')"
